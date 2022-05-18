@@ -1,5 +1,6 @@
 import React from "react";
 import Button from "react-bootstrap/Button";
+import Def from "./Def";
 
 export default function LowerMenu() {
   return (

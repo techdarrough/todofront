@@ -1,8 +1,10 @@
 import React from "react";
 import ListGroup from "react-bootstrap/ListGroup";
+import Def from "../components/Def";
 export default function Main() {
   return (
-    <div>
+   <Def> 
+   <div>
       <h1>My To Do List </h1>
 
       <ListGroup>
@@ -29,5 +31,6 @@ export default function Main() {
         </ListGroup.Item>
       </ListGroup>
     </div>
+    </Def>
   );
 }
