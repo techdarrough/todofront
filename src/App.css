@@ -1,3 +1,15 @@
+.App-Div {
+    
+    display: flex;
+    width: auto;
+    flex-Direction:center;
+    justify-Content: center;
+    align-items: center;
+    
+  
+  }
+  
+
 h1{
     color: blue;
     text-align: center;
