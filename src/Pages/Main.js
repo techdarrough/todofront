@@ -16,7 +16,7 @@ const Main = (props) => {
         setTodo(data);
       })
       .catch((err) => {
-        resizeBy.status(500).json(err);
+        res.status(500).json(err);
         console.log(err)
       });
   }, []);
