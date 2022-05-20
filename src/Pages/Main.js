@@ -5,6 +5,8 @@ import Def from "../components/Def";
 
 
 
+
+
 const Main = (props) => {
 
   const [todo, setTodo] = useState([])
@@ -35,14 +37,21 @@ const Main = (props) => {
 
 
     <Def>
+     
       <div>
         <h1>My To Do List </h1>
+       
 
         <ListGroup >
           {todoList}
         </ListGroup>
+        
+
       </div>
+     
+
     </Def>
+
   );
 }
 export default Main

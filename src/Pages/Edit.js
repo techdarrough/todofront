@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
+import Def from "../components/Def";
 
 export default function Edit() {
   let id = useLocation().pathname.substring(6); // employee's mongoDB id
@@ -13,7 +14,7 @@ export default function Edit() {
   });
 
   // functions
-  let handleTodo = (e) => {
+  let handleTodoSubmit = (e) => {
     e.preventDefault();
     fetch("http://localhost:3001/todos/" + id, {
       method: "PUT",
@@ -34,7 +35,7 @@ export default function Edit() {
         <h1>Edit Todos</h1>
 
         <form
-          onSubmit={handleSubmit}
+          onSubmit={handleTodoSubmit}
           style={{ display: "flex", flexDirection: "column", width: "250px" }}
         >
           <input

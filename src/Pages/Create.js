@@ -1,14 +1,15 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import Def from "../components/Def";
 
-const Add = () => { 
+const Create = () => { 
   // useState
   const [todo_name, setTodoName] = useState("");
   const [description, setDescription] = useState("");
   
 
   // functions
-  let handleSubmit = (e) => {
+  let handleTodoSubmit = (e) => {
     e.preventDefault();
     fetch("http://localhost:3001/todos", {
       method: "POST",
@@ -24,10 +25,12 @@ const Add = () => {
 
   // jsx
   return (
+      <Def>
     <div>
       <h1>Add New ToDo</h1>
+
       <form
-        onSubmit={handleSubmit}
+        onSubmit={handleTodoSubmit}
         style={{ display: "flex", flexDirection: "column", width: "250px" }}
       >
         <input
@@ -47,5 +50,8 @@ const Add = () => {
       </form>
       <Link to='/'>Return to ToDo Page</Link>
     </div>
+    </Def>
   );
 }
+
+export default Create
