@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import Button  from "react-bootstrap/Button";
 import ListGroup from "react-bootstrap/ListGroup";
 import Def from "../components/Def";
@@ -11,6 +12,7 @@ import Def from "../components/Def";
 const Main = () => {
 //user state
   const [todo, setTodo] = useState([])
+  const [value, setValue] = useState(0)
 //functions
   const getTodos = () => {
     
@@ -32,6 +34,8 @@ const Main = () => {
     }).then((response) => response.json())
     .then((data) => {
       console.log("DATA", data);
+      setValue(value + 1);
+      console.log(value)
     
     })
     .catch((err) => {
@@ -42,7 +46,7 @@ const Main = () => {
 
 
   // Use Effect 
-  useEffect(() => getTodos(), [todo]);
+  useEffect(() => getTodos(), [value]);  // only resuscribe if todo use state is updated
 // handletodo state (if needed may comment out)
   const handleTodo = (data) => {
     setTodo(data)
@@ -54,7 +58,7 @@ const Main = () => {
 
     
     <ListGroup horizontal>
-      <ListGroup.Item key={todo_id}><Button variant="success" >Edit</Button></ListGroup.Item>
+      <ListGroup.Item key={todo_id}><Link to={`/edit/`}><Button variant="success"  >Edit</Button></Link></ListGroup.Item>
 
       <ListGroup.Item className="flex-fill" >
         {todo_name}<br/>{description}
