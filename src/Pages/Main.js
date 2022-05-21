@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import Button  from "react-bootstrap/Button";
 import ListGroup from "react-bootstrap/ListGroup";
 import Def from "../components/Def";
 
@@ -7,22 +8,42 @@ import Def from "../components/Def";
 
 
 
-const Main = (props) => {
-
+const Main = () => {
+//user state
   const [todo, setTodo] = useState([])
-  useEffect(() => {
-    fetch("http://localhost:3001/todos")
-      .then((response) => response.json())
-      .then((data) => {
-        console.log("DATA", data);
-        setTodo(data);
-      })
-      .catch((err) => {
-        res.status(500).json(err);
-        console.log(err)
-      });
-  }, []);
+//functions
+  const getTodos = () => {
+    
+      fetch("http://localhost:3001/todos")
+        .then((response) => response.json())
+        .then((data) => {
+          console.log("DATA", data);
+          setTodo(data);
+        })
+        .catch((err) => {
+          
+          console.log(err)
+        });
+    };
 
+  const deleteTodo = async (id) => {
+    await fetch(`http://localhost:3001/todos/${id}`, {
+      method: "DELETE",
+    }).then((response) => response.json())
+    .then((data) => {
+      console.log("DATA", data);
+    
+    })
+    .catch((err) => {
+      
+      console.log(err)
+    });;
+  };
+
+
+  // Use Effect 
+  useEffect(() => getTodos(), [todo]);
+// handletodo state (if needed may comment out)
   const handleTodo = (data) => {
     setTodo(data)
   }
@@ -30,7 +51,27 @@ const Main = (props) => {
  
 // map array into a table
   let todoList = todo.map(({ todo_id, todo_name, description }) => (
-    <ListGroup.Item key={todo_id} >{todo_name}:{description}</ListGroup.Item>
+
+    
+    <ListGroup horizontal>
+      <ListGroup.Item key={todo_id}><Button variant="success" >Edit</Button></ListGroup.Item>
+
+      <ListGroup.Item className="flex-fill" >
+        {todo_name}<br/>{description}
+      </ListGroup.Item>
+
+      <ListGroup.Item ><Button variant="danger" 
+      onClick={() => {
+        deleteTodo(todo_id);
+        
+      }}
+      >Delete</Button></ListGroup.Item>
+
+
+    </ListGroup>
+
+
+
   ))
 
   return (
@@ -39,16 +80,12 @@ const Main = (props) => {
     <Def>
      
       <div>
+
         <h1>My To Do List </h1>
-       
-
-        <ListGroup >
-          {todoList}
-        </ListGroup>
-        
-
+   
+       <div>  {todoList} </div>
+  
       </div>
-     
 
     </Def>
 
