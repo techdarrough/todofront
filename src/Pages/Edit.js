@@ -38,7 +38,7 @@ const getEdit = () => {
   const handleTodoSubmit = (e) => {
     e.preventDefault();
                
-    fetch(`https://unlv-mp2-todo-list.herokuapp.com:3001/todos/${params.todo_id}`, {
+    fetch(`https://unlv-mp2-todo-list.herokuapp.com/todos/${params.todo_id}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
