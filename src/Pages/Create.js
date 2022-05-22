@@ -16,7 +16,7 @@ const Create = () => {
   const handleTodoSubmit = (e) => {
     (e).preventDefault();
     
-    fetch("https://unlv-mp2-todo-list-app.herokuapp.com:3001/todos", {
+    fetch("https://unlv-mp2-todo-list.herokuapp.com:3001/todos", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({

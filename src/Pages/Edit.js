@@ -21,7 +21,7 @@ useEffect(() => { getEdit() }, []);
 // functions
 const getEdit = () => {
 
-    fetch(`https://unlv-mp2-todo-list-app.herokuapp.com:3001/todos/${params.todo_id}`)
+    fetch(`https://unlv-mp2-todo-list.herokuapp.com/todos/${params.todo_id}`)
       .then((response) => response.json())
       .then((data) => {
         console.log("DATA", data);
@@ -37,8 +37,8 @@ const getEdit = () => {
 
   const handleTodoSubmit = (e) => {
     e.preventDefault();
-    
-    fetch(`https://unlv-mp2-todo-list-app.herokuapp.com:3001/todos/${params.todo_id}`, {
+               
+    fetch(`https://unlv-mp2-todo-list.herokuapp.com:3001/todos/${params.todo_id}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
