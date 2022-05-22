@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { Link, useNavigate  } from "react-router-dom";
 import Button  from "react-bootstrap/Button"
 import Def from "../components/Def";
+import FloatingLabel from 'react-bootstrap/FloatingLabel'
+import Form from 'react-bootstrap/Form'
 
 
 const Create = () => { 
@@ -13,7 +15,7 @@ const Create = () => {
   // functions
   const handleTodoSubmit = (e) => {
     (e).preventDefault();
-    console.log(todo_name);
+    
     fetch("http://localhost:3001/todos", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -33,27 +35,41 @@ const Create = () => {
     <div>
       <h1>Add New ToDo</h1>
 
-      <form
-        onSubmit={handleTodoSubmit} 
-        style={{ display: "flex", flexDirection: "column", width: "250px" }}
-      >
-        <input
+   
+
+
+<Form onSubmit={handleTodoSubmit} >
+
+        <FloatingLabel  
+        controlId="floatingTextarea" 
+        label="Todo name "
+        className="mb-3"  >
+          <Form.Control
+          
+           
           type='text'
-          name='todo_name'
-          placeholder='todo_name'
-          onChange={(e) => setTodoName(e.target.value)}
-        />
-        <input
-          type='text'
-          name='description'
-          placeholder='description'
-          onChange={(e) => setDescription(e.target.value)}
-        />
-        
-        <input type='submit' value='Add ToDo' />
-      </form>
-      
-      <Link to='/'><Button variant="outline-primary">Return to ToDo List</Button></Link>
+          as="textarea" 
+          //
+          onChange={(e) => setTodoName(e.target.value)} />
+        </FloatingLabel>
+        <FloatingLabel controlId="floatingTextarea2" label="Description">
+          <Form.Control
+           type='text'
+            as="textarea"
+            onChange={(e) => setDescription(e.target.value)}
+            style={{ height: '100px' }}
+          />
+          <Button variant="outline-success" type='submit' value='Add ToDo' >Create Todo</Button>
+
+          <Link to='/'><Button variant="outline-primary">Return to ToDo List</Button></Link>
+
+        </FloatingLabel>
+        </Form>
+
+
+
+
+
     </div>
     </Def>
   );

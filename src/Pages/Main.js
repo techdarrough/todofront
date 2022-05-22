@@ -23,7 +23,7 @@ const Main = () => {
     fetch("http://localhost:3001/todos")
       .then((response) => response.json())
       .then((data) => {
-        console.log("DATA", data);
+        
         setTodo(data);
       })
       .catch((err) => {
@@ -37,7 +37,7 @@ const Main = () => {
       method: "DELETE",
     }).then((response) => response.json())
       .then((data) => {
-        console.log("DATA", data);
+        
         setValue(value + 1);
 
 
@@ -64,7 +64,7 @@ const Main = () => {
     <ListGroup horizontal>
       <ListGroup.Item key={todo_id}>
         <Link to={`/edit/${todo_id}`}>
-          <Button variant="success" onClick={handleEdit} >Edit</Button>
+          <Button variant="outline-success" onClick={handleEdit} >Edit</Button>
         </Link>
       </ListGroup.Item>
 
@@ -72,7 +72,7 @@ const Main = () => {
         {todo_name}<br />{description}
       </ListGroup.Item>
 
-      <ListGroup.Item ><Button variant="danger"
+      <ListGroup.Item ><Button variant="outline-danger"
         onClick={() => {
           deleteTodo(todo_id);
 

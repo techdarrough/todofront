@@ -1,16 +1,16 @@
 import React from 'react'
 
 
-const Def = ({children}) =>
+const Def = ({ children }) =>
 (
-    <main>
-  <div className="App-Div">
-  {children}
+  <main>
+    <div className="App-Div">
+      {children}
 
-  </div>
+    </div>
 
 
-    </main>
+  </main>
 )
 
 export default Def 
