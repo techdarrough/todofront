@@ -19,7 +19,7 @@ root.render(
     <Routes>
     <Route path="/" element={<Main />} />
     <Route path="/create" element={<Create />} />
-    <Route path="/edit" element={<Edit />} />
+    <Route path="/edit/:todo_id" element={<Edit />} />
 
 
     </Routes>
