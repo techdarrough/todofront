@@ -3,21 +3,22 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import Form from 'react-bootstrap/Form'
 import Button  from "react-bootstrap/Button";
 import Def from "../components/Def";
+import FloatingLabel from 'react-bootstrap/FloatingLabel'
+
 
 export default function Edit() {
+
    let params = useParams();
+
    const navigate = useNavigate ();
-  const [todo, setTodo] = useState({
-    todo_id: "",
-    todo_name: "",
-    description: "",
-  });
-const [value, setValue] = useState(0)
-  // functions
+
+  const [todo, setTodo] = useState({ });
+const [editTodo, setEditTodo] = useState({})
+  
 // useEffect 
 useEffect(() => { getEdit() }, []);  
  
-
+// functions
 const getEdit = () => {
 
     fetch(`http://localhost:3001/todos/${params.todo_id}`)
@@ -36,7 +37,7 @@ const getEdit = () => {
 
   const handleTodoSubmit = (e) => {
     e.preventDefault();
-    console.log(params.todo_id)
+    console.log(todo.todo_name)
     fetch(`http://localhost:3001/todos/${params.todo_id}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
@@ -47,7 +48,7 @@ const getEdit = () => {
       
       }),
     });
-    // navigate('/')
+    navigate('/')
   };
 
 
@@ -63,23 +64,39 @@ const getEdit = () => {
       >
         <input
           type='text'
-          name='todo_name'
-          placeholder='todo_name'
-          onChange={(e) => setTodo(e.target.value)}
-          value={todo.todo_name}
+          // name='todo_name'
+          placeholder={todo.todo_name}
+          onChange={(e) => setTodo({...todo, todo_name:e.target.value})}
+          // value={todo.todo_name}
         />
         <input
           type='text'
-          name='description'
-          placeholder='description'
-          onChange={(e) => setTodo(e.target.value)}
-          value={todo.description}
+          
+          placeholder={todo.description}
+          onChange={(e) => setTodo({...todo, description:e.target.value})}
+          // value={todo.description}
         />
         
         <input type='submit' value='Submit Changes' />
+        
+        <Link to='/'><Button variant="outline-primary">Return to ToDo List</Button></Link>
       </form>
       
-      <Link to='/'><Button variant="outline-primary">Return to ToDo List</Button></Link>
+
+
+        {/* <FloatingLabel controlId="floatingTextarea" label="Comments" className="mb-3">
+          <Form.Control as="textarea" placeholder="Leave a comment here" />
+        </FloatingLabel>
+        <FloatingLabel controlId="floatingTextarea2" label="Comments">
+          <Form.Control
+            as="textarea"
+            placeholder="Leave a comment here"
+            style={{ height: '100px' }}
+          />
+        </FloatingLabel> */}
+
+
+      
       </div>
 
 
