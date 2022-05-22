@@ -21,7 +21,7 @@ useEffect(() => { getEdit() }, []);
 // functions
 const getEdit = () => {
 
-    fetch(`http://ec2-52-3-2-245.compute-1.amazonaws.com:3001/todos/${params.todo_id}`)
+    fetch(`https://ec2-52-3-2-245.compute-1.amazonaws.com:3001/todos/${params.todo_id}`)
       .then((response) => response.json())
       .then((data) => {
         console.log("DATA", data);
@@ -38,7 +38,7 @@ const getEdit = () => {
   const handleTodoSubmit = (e) => {
     e.preventDefault();
     
-    fetch(`http://ec2-52-3-2-245.compute-1.amazonaws.com:3001/todos/${params.todo_id}`, {
+    fetch(`https://ec2-52-3-2-245.compute-1.amazonaws.com:3001/todos/${params.todo_id}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({

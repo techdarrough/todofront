@@ -16,7 +16,7 @@ const Create = () => {
   const handleTodoSubmit = (e) => {
     (e).preventDefault();
     
-    fetch("http://ec2-52-3-2-245.compute-1.amazonaws.com:3001/todos", {
+    fetch("https://ec2-52-3-2-245.compute-1.amazonaws.com:3001/todos", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
