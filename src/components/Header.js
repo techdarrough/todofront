@@ -12,9 +12,9 @@ export default function Header() {
           <Nav.Item>
             <Nav.Link href="/create">Create</Nav.Link>
           </Nav.Item>
-          <Nav.Item>
+          {/* <Nav.Item>
             <Nav.Link href="/edit">Edit</Nav.Link>
-          </Nav.Item>
+          </Nav.Item> */}
         </Nav>
       </div>
     </div>

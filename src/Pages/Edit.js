@@ -1,36 +1,55 @@
-import React, { useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { Link, useNavigate, useParams } from "react-router-dom";
+import Form from 'react-bootstrap/Form'
 import Button  from "react-bootstrap/Button";
 import Def from "../components/Def";
-import { ButtonGroup } from "react-bootstrap";
 
 export default function Edit() {
-  let id = useLocation().pathname.substring(6); // works for postgres
- 
-  // useState
-  const [todos, setTodos] = useState({
+   let params = useParams();
+   const navigate = useNavigate ();
+  const [todo, setTodo] = useState({
     todo_id: "",
     todo_name: "",
     description: "",
-   
   });
-
+const [value, setValue] = useState(0)
   // functions
+// useEffect 
+useEffect(() => { getEdit() }, []);  
+ 
 
+const getEdit = () => {
+
+    fetch(`http://localhost:3001/todos/${params.todo_id}`)
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("DATA", data);
+        setTodo(data);
+      })
+      .catch((err) => {
+
+        console.log(err)
+      });
+  };
+
+  
 
   const handleTodoSubmit = (e) => {
     e.preventDefault();
-    fetch("http://localhost:3001/todos/" + id, {
+    console.log(params.todo_id)
+    fetch(`http://localhost:3001/todos/${params.todo_id}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        todo_id: todos.todo_id,
-        todo_name: todos.todo_name,
-        description: todos.description,
+       
+        todo_name: todo.todo_name,
+        description: todo.description
       
       }),
     });
+    // navigate('/')
   };
+
 
   // jsx
   return (
@@ -39,29 +58,37 @@ export default function Edit() {
         <h1>Edit Todos</h1>
 
         <form
-          onSubmit={handleTodoSubmit}
-          style={{ display: "flex", flexDirection: "column", width: "250px" }}
-        >
-          <input
-            type="text"
-            placeholder="todo_name"
-            name="todo_name"
-            onChange={(e) => setTodos({ ...todos, todo_name: e.target.value })}
-          />
-
-          <input
-            type="text"
-            placeholder="description"
-            name="description"
-            onChange={(e) =>
-              setTodos({ ...todos, description: e.target.value })
-            }
-          />
-
-          <input type="submit" value="Edit Todo" />
-        </form>
-        <Link to="/"><Button>Return to Todo Page</Button></Link>
+        onSubmit={handleTodoSubmit} 
+        style={{ display: "flex", flexDirection: "column", width: "250px" }}
+      >
+        <input
+          type='text'
+          name='todo_name'
+          placeholder='todo_name'
+          onChange={(e) => setTodo(e.target.value)}
+          value={todo.todo_name}
+        />
+        <input
+          type='text'
+          name='description'
+          placeholder='description'
+          onChange={(e) => setTodo(e.target.value)}
+          value={todo.description}
+        />
+        
+        <input type='submit' value='Submit Changes' />
+      </form>
+      
+      <Link to='/'><Button variant="outline-primary">Return to ToDo List</Button></Link>
       </div>
+
+
+
+
+
+
+
+
     </Def>
   );
 }

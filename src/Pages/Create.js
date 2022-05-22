@@ -1,26 +1,30 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate  } from "react-router-dom";
+import Button  from "react-bootstrap/Button"
 import Def from "../components/Def";
+
 
 const Create = () => { 
   // useState
   const [todo_name, setTodoName] = useState("");
   const [description, setDescription] = useState("");
-  
+  const navigate = useNavigate ();
 
   // functions
-  let handleTodoSubmit = (e) => {
-    e.preventDefault();
+  const handleTodoSubmit = (e) => {
+    (e).preventDefault();
+    console.log(todo_name);
     fetch("http://localhost:3001/todos", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        todo_name: "",
-        description: ""
+        todo_name: todo_name,
+        description: description
      
         
-      }),
+      })
     });
+    navigate('/');
   };
 
   // jsx
@@ -30,7 +34,7 @@ const Create = () => {
       <h1>Add New ToDo</h1>
 
       <form
-        onSubmit={handleTodoSubmit}
+        onSubmit={handleTodoSubmit} 
         style={{ display: "flex", flexDirection: "column", width: "250px" }}
       >
         <input
@@ -48,7 +52,8 @@ const Create = () => {
         
         <input type='submit' value='Add ToDo' />
       </form>
-      <Link to='/'>Return to ToDo Page</Link>
+      
+      <Link to='/'><Button variant="outline-primary">Return to ToDo List</Button></Link>
     </div>
     </Def>
   );
