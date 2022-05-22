@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
+import Button  from "react-bootstrap/Button";
 import Def from "../components/Def";
+import { ButtonGroup } from "react-bootstrap";
 
 export default function Edit() {
-  let id = useLocation().pathname.substring(6); // employee's mongoDB id
-
+  let id = useLocation().pathname.substring(6); // works for postgres
+ 
   // useState
   const [todos, setTodos] = useState({
     todo_id: "",
@@ -14,7 +16,9 @@ export default function Edit() {
   });
 
   // functions
-  let handleTodoSubmit = (e) => {
+
+
+  const handleTodoSubmit = (e) => {
     e.preventDefault();
     fetch("http://localhost:3001/todos/" + id, {
       method: "PUT",
@@ -56,7 +60,7 @@ export default function Edit() {
 
           <input type="submit" value="Edit Todo" />
         </form>
-        <Link to="/">Return to Todo Page</Link>
+        <Link to="/"><Button>Return to Todo Page</Button></Link>
       </div>
     </Def>
   );
