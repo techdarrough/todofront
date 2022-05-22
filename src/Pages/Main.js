@@ -20,7 +20,7 @@ const Main = () => {
   //functions
   const getTodos = () => {
 
-    fetch("https://unlv-mp2-todo-list-app.herokuapp.com/:3001/todos")
+    fetch("https://unlv-mp2-todo-list-app.herokuapp.com:3001/todos")
       .then((response) => response.json())
       .then((data) => {
         
@@ -33,7 +33,7 @@ const Main = () => {
   };
 
   const deleteTodo = async (id) => {
-    await fetch(`https://unlv-mp2-todo-list-app.herokuapp.com/:3001/todos/${id}`, {
+    await fetch(`https://unlv-mp2-todo-list-app.herokuapp.com:3001/todos/${id}`, {
       method: "DELETE",
     }).then((response) => response.json())
       .then((data) => {
