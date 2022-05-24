@@ -1,14 +1,15 @@
 import React, { useState } from "react";
-import { Link, useNavigate  } from "react-router-dom";
-import Button  from "react-bootstrap/Button"
+import { Link, useNavigate } from "react-router-dom";
+import Button from "react-bootstrap/Button"
 import Def from "../components/Def";
+import FloatingLabel from 'react-bootstrap/FloatingLabel'
+import Form from 'react-bootstrap/Form'
 
-
-const Create = () => { 
+const Create = () => {
   // useState
   const [todo_name, setTodoName] = useState("");
   const [description, setDescription] = useState("");
-  const navigate = useNavigate ();
+  const navigate = useNavigate();
 
   // functions
   const handleTodoSubmit = (e) => {
@@ -20,8 +21,8 @@ const Create = () => {
       body: JSON.stringify({
         todo_name: todo_name,
         description: description
-     
-        
+
+
       })
     });
     navigate('/');
@@ -29,32 +30,39 @@ const Create = () => {
 
   // jsx
   return (
-      <Def>
-    <div>
-      <h1>Add New ToDo</h1>
+    <Def>
+      <div>
+        <h1>Add New ToDo</h1>
 
-      <form
-        onSubmit={handleTodoSubmit} 
-        style={{ display: "flex", flexDirection: "column", width: "250px" }}
-      >
-        <input
-          type='text'
-          name='todo_name'
-          placeholder='todo_name'
-          onChange={(e) => setTodoName(e.target.value)}
-        />
-        <input
-          type='text'
-          name='description'
-          placeholder='description'
-          onChange={(e) => setDescription(e.target.value)}
-        />
-        
-        <input type='submit' value='Add ToDo' />
-      </form>
-      
-      <Link to='/'><Button variant="outline-primary">Return to ToDo List</Button></Link>
-    </div>
+        <Form onSubmit={handleTodoSubmit} >
+
+          <FloatingLabel
+            controlId="floatingTextarea"
+            label="Todo name "
+            className="mb-3"  >
+            <Form.Control
+
+
+              type='text'
+              as="textarea"
+              //
+              onChange={(e) => setTodoName(e.target.value)} />
+          </FloatingLabel>
+          <FloatingLabel controlId="floatingTextarea2" label="Description">
+            <Form.Control
+              type='text'
+              as="textarea"
+              onChange={(e) => setDescription(e.target.value)}
+              style={{ height: '100px' }}
+            />
+            <Button variant="outline-success" type='submit' value='Add ToDo' >Create Todo</Button>
+
+            <Link to='/'><Button variant="outline-primary">Return to ToDo List</Button></Link>
+
+          </FloatingLabel>
+        </Form>
+
+      </div>
     </Def>
   );
 }
