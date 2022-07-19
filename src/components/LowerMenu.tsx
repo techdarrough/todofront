@@ -4,7 +4,7 @@ import Def from "./Def";
 
 
 
-export default function LowerMenu() {
+export default function LowerMenu(): JSX.Element {
   return (
     <Def>
       <div>

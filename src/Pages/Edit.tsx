@@ -6,13 +6,19 @@ import Def from "../components/Def";
 import FloatingLabel from 'react-bootstrap/FloatingLabel'
 
 
-export default function Edit() {
+export default function Edit(): JSX.Element {
 
   let params = useParams();
 
   const navigate = useNavigate();
 
-  const [todo, setTodo] = useState({});
+  interface Itodo {
+    name: string;
+    description:string
+  }
+
+  // const [todo, setTodo] = useState({});
+  const [todo, setTodo] = useState<Itodo | any>()
   const [editTodo, setEditTodo] = useState({})
 
   // useEffect 
@@ -35,21 +41,19 @@ export default function Edit() {
 
 
 
-  const handleTodoSubmit = (e) => {
+  function handleTodoSubmit(e: any): void {
     e.preventDefault();
-    console.log(todo.todo_name)
+    console.log(todo.todo_name);
     fetch(`http://localhost:3001/todos/${params.todo_id}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-
         todo_name: todo.todo_name,
         description: todo.description
-
       }),
     });
-    navigate('/')
-  };
+    navigate('/');
+  }
 
 
   // jsx

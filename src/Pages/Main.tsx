@@ -32,7 +32,7 @@ const Main = () => {
       });
   };
 
-  const deleteTodo = async (id) => {
+  const deleteTodo = async (id: never) => {
     await fetch(`http://localhost:3001/todos/${id}`, {
       method: "DELETE",
     }).then((response) => response.json())
@@ -51,7 +51,7 @@ const Main = () => {
 
 
   // handletodo state (if needed may comment out)
-  const handleEdit = (data) => {
+  const handleEdit = (data: any) => {
     console.log(data)
 
   }

@@ -5,14 +5,14 @@ import Def from "../components/Def";
 import FloatingLabel from 'react-bootstrap/FloatingLabel'
 import Form from 'react-bootstrap/Form'
 
-const Create = () => {
+export default function Create(): JSX.Element {
   // useState
   const [todo_name, setTodoName] = useState("");
   const [description, setDescription] = useState("");
   const navigate = useNavigate();
 
   // functions
-  const handleTodoSubmit = (e) => {
+  function handleTodoSubmit(e: any) {
     (e).preventDefault();
     console.log(todo_name);
     fetch("http://localhost:3001/todos", {
@@ -21,12 +21,10 @@ const Create = () => {
       body: JSON.stringify({
         todo_name: todo_name,
         description: description
-
-
       })
     });
     navigate('/');
-  };
+  }
 
   // jsx
   return (
@@ -34,12 +32,12 @@ const Create = () => {
       <div>
         <h1>Add New ToDo</h1>
 
-        <Form onSubmit={handleTodoSubmit} >
+        <Form onSubmit={handleTodoSubmit}>
 
           <FloatingLabel
             controlId="floatingTextarea"
             label="Todo name "
-            className="mb-3"  >
+            className="mb-3">
             <Form.Control
 
 
@@ -53,9 +51,8 @@ const Create = () => {
               type='text'
               as="textarea"
               onChange={(e) => setDescription(e.target.value)}
-              style={{ height: '100px' }}
-            />
-            <Button variant="outline-success" type='submit' value='Add ToDo' >Create Todo</Button>
+              style={{ height: '100px' }} />
+            <Button variant="outline-success" type='submit' value='Add ToDo'>Create Todo</Button>
 
             <Link to='/'><Button variant="outline-primary">Return to ToDo List</Button></Link>
 
@@ -67,4 +64,3 @@ const Create = () => {
   );
 }
 
-export default Create

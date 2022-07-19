@@ -1,7 +1,7 @@
 import React from "react";
 import Nav from "react-bootstrap/Nav";
 
-export default function Header() {
+export default function Header(): JSX.Element {
   return (
     <div>
       <div>
